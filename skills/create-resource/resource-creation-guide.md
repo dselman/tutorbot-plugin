@@ -161,6 +161,9 @@ Use markdown headings (#, ##, ###) to organize your content into steps. The bot 
 # Introduction
 
 Introduce the topic of photosynthesis and why it matters.
+Show the diagram of a plant in sunlight:
+
+![156](/api/v1/images/156/data)
 
 ## Step 1: What is Photosynthesis?
 
@@ -168,15 +171,23 @@ Explain that photosynthesis is the process plants use to
 convert sunlight into food. Check that the student
 understands this basic definition before moving on.
 
+::quiz{#28}
+
 ## Step 2: The Ingredients
 
+Show the diagram of the photosynthesis inputs:
+
+![157](/api/v1/images/157/data)
+
 Discuss the inputs: sunlight, water, and carbon dioxide.
-Ask the student to name these three ingredients.
+
+::quiz{#29}
 
 ## Step 3: The Products
 
 Explain that plants produce glucose and oxygen.
-Ask the student what gas is released during photosynthesis.
+
+::quiz{#30}
 
 # Summary
 
@@ -184,14 +195,39 @@ Review the key points and congratulate the student
 on completing the lesson.
 ```
 
+Notice how this example includes an image or quiz (or both) in **every section**. This is essential for keeping students engaged. A section that is only text with no interactivity will feel like a lecture.
+
 ### Lesson Flow
 
 A well-structured lesson typically includes:
 
-1. **Introduction**: Engage the student and preview what they'll learn
-2. **Content Steps**: Break the material into digestible sections
-3. **Check Points**: Include questions to verify understanding
+1. **Introduction**: Engage the student with a visual and preview what they'll learn
+2. **Content Steps**: Break the material into digestible sections, **each with at least a quiz or image**
+3. **Check Points**: Include quizzes to verify understanding — aim for **at least 2-3 quizzes per resource**
 4. **Summary**: Recap key takeaways
+
+### Keeping Lessons Interactive
+
+**The most common mistake is creating text-heavy resources with too few quizzes and images.** Resources that are mostly text feel passive and lecture-like, even when delivered by an engaging AI tutor.
+
+Follow these density guidelines:
+
+| Element | Minimum per resource | Purpose |
+|---------|---------------------|---------|
+| **Quizzes** | 2-3 | Check understanding, keep students actively thinking |
+| **Images** | 1-2 | Illustrate concepts, break up text, give the bot material to discuss |
+
+**Signs your resource is too text-heavy:**
+- A section has more than 3-4 sentences with no quiz or image
+- The resource has fewer than 2 quizzes total
+- The resource has no images at all
+- The student would spend most of the lesson just listening
+
+**How to fix text-heavy content:**
+- Add a quick quiz after each concept to check understanding
+- Add an image or diagram to illustrate the key idea in each section
+- Split long explanatory sections into shorter ones with interactivity between them
+- Use a variety of quiz types (single choice for quick checks, free text for calculations, fraction for math) to keep things fresh
 
 ### Recommended Length
 
@@ -278,12 +314,14 @@ Even with Bot Vision enabled, you should still provide a good description, quest
 
 ### Image Best Practices
 
+- **Include at least 1-2 images per resource** — every resource should have visuals. Text-only resources feel dry and lecture-like.
 - **Use clear, simple images** that focus on one concept
 - **Write detailed descriptions** even if Bot Vision is enabled
 - **Enable Bot Vision** for images where visual details matter
 - **Make questions specific** to what the image shows
 - **Provide helpful hints** that scaffold learning
 - **Test your lesson** to ensure the image discussion flows naturally
+- **Don't skip images** — even if the topic seems abstract, a diagram, chart, or illustration almost always helps
 
 ## Working with Videos
 
@@ -332,17 +370,23 @@ Quizzes provide structured assessment with automatic correctness checking. The p
 
 ### When to Use Quizzes
 
+**Use quizzes liberally.** Quizzes are the primary way students actively engage with the material. A resource without enough quizzes feels passive and lecture-like. Aim for **at least 2-3 quizzes per resource**, and consider adding more for longer or more complex topics.
+
 **Use quizzes for:**
 - Testing specific factual knowledge
-- Checking understanding before moving to the next topic
+- Checking understanding **after every major concept** before moving to the next topic
 - Providing structured practice with clear feedback
 - Assessments where you want consistent, objective evaluation
+- Keeping the student actively thinking and participating (not just listening)
+- Breaking up text-heavy sections with interactive checkpoints
 
 **Use conversational questions for:**
 - Open-ended discussion and exploration
 - Questions with many valid answers
 - Building on student responses dynamically
 - More natural dialogue flow
+
+**Tip:** When in doubt, add a quiz. It's better to have slightly too many interactive checkpoints than to have a passive, text-heavy lesson.
 
 ### Quiz Question Types
 
@@ -369,7 +413,9 @@ Quizzes provide structured assessment with automatic correctness checking. The p
    - **Question Type**: Single choice, Multiple choice, or Free text
    - **Answers** (for choice questions): The answer options
    - **Expected Answer** (for free text): The correct answer to evaluate against
-   - **Input Restriction** (for free text): Text, Integer, or Decimal
+   - **Input Restriction** (for free text): Text, Integer, Decimal, or Fraction
+   - **Min/Max Value** (for numeric types): Optional range constraints
+   - **Allow Negative** (for numeric types): Whether negative values are accepted
    - **Evaluation Criteria** (for free text): Optional guidance for AI grading
    - **Retry Limit**: Number of attempts allowed
    - **Hint**: Guidance for incorrect attempts
@@ -386,7 +432,9 @@ The quiz appears as a directive in your content (e.g., `::quiz{#123}`). Don't ed
 | **Question Type** | "Single" for one answer, "Multiple" for selecting all correct answers, "Free text" for typed responses. |
 | **Answers** | List of options with correct answers marked. (Single/Multiple choice only) |
 | **Expected Answer** | The correct answer the AI evaluates against. (Free text only) |
-| **Input Restriction** | What type of input is allowed: "Text" (any text), "Integer" (whole numbers), or "Decimal" (numbers with decimals). (Free text only) |
+| **Input Restriction** | What type of input is allowed: "Text" (any text), "Integer" (whole numbers), "Decimal" (numbers with decimals), or "Fraction" (e.g. 1/3). (Free text only) |
+| **Min/Max Value** | Optional range constraints for numeric input types (Integer, Decimal, Fraction). For fractions, the range applies to the evaluated decimal value. (Free text only) |
+| **Allow Negative** | Whether negative values are accepted. Default: yes. (Free text with numeric input types only) |
 | **Evaluation Criteria** | Optional guidance for the AI on how strictly to evaluate answers. (Free text only) |
 | **Retry Limit** | How many attempts before moving on. Leave empty for unlimited retries. |
 | **Hint** | What the bot tells students after an incorrect answer to guide them. |
@@ -400,11 +448,17 @@ When creating free text questions, choose the appropriate input restriction:
 | **Text** | Written answers, explanations, names | "photosynthesis", "The mitochondria" |
 | **Integer** | Whole number calculations, counts | "42", "100", "-5" |
 | **Decimal** | Calculations with decimals, measurements | "3.14", "98.6", "0.5" |
+| **Fraction** | Fraction answers, ratios, proportions | "1/3", "2/5", "-3/4" |
 
 The input restriction affects:
-- What the student can type (numbers only for Integer/Decimal)
-- How the AI evaluates the answer
+- What the student can type (numbers only for Integer/Decimal, fraction format for Fraction)
+- How the AI evaluates the answer (fractions are checked for equivalence, e.g. 2/6 = 1/3)
 - The placeholder text shown to students
+- Whether an on-screen keypad or fraction input is displayed
+
+For numeric types (Integer, Decimal, Fraction), you can also set:
+- **Min/Max Value**: Constrain the acceptable range. For fractions, this applies to the evaluated decimal value (e.g. min=0, max=1 means 1/3 is valid but 5/3 is not)
+- **Allow Negative**: Toggle whether negative values are accepted (default: yes)
 
 ### Free Text Evaluation
 
@@ -447,13 +501,25 @@ Answers:
   ✗ Glucose
 ```
 
-**Good free text question:**
+**Good free text question (decimal):**
 ```
 Question: Calculate 15% of 80.
 Type: Free text
 Input Restriction: Decimal
 Expected Answer: 12
 Evaluation Criteria: Accept 12, 12.0, or 12.00
+```
+
+**Good free text question (fraction):**
+```
+Question: What is 1/2 + 1/6?
+Type: Free text
+Input Restriction: Fraction
+Expected Answer: 2/3
+Min Value: 0
+Max Value: 1
+Allow Negative: No
+Evaluation Criteria: Accept equivalent fractions (e.g. 4/6, 8/12)
 ```
 
 **Tips for choice questions:**
@@ -465,6 +531,9 @@ Evaluation Criteria: Accept 12, 12.0, or 12.00
 **Tips for free text questions:**
 - Use Integer restriction for whole number answers
 - Use Decimal restriction for calculations that may have decimals
+- Use Fraction restriction for fraction answers (e.g. 1/3, 2/5) - the system checks equivalence automatically
+- Set Min/Max values to constrain numeric ranges when appropriate
+- Disable "Allow Negative" for questions where negative answers don't make sense
 - Write expected answers that capture the core correct response
 - Use evaluation criteria to specify acceptable variations
 
@@ -518,12 +587,13 @@ When the bot displays a quiz:
 
 ### Quiz Best Practices
 
-- **Place quizzes strategically** after teaching the relevant content
+- **Include quizzes generously** — aim for at least 2-3 per resource, one after each major concept
+- **Place quizzes after teaching** the relevant content, not before
 - **Start with easier questions** and progress to harder ones
+- **Vary quiz types** for engagement — mix single choice, multiple choice, free text, and fraction questions
 - **Provide meaningful hints** that teach, not just hint
 - **Test your quizzes** to ensure the flow feels natural
-- **Don't overuse quizzes** - balance with conversational questions
-- **Match question type to content** - use single choice for one right answer, multiple choice when several apply
+- **Match question type to content** — use single choice for quick fact checks, free text for calculations, fraction for math
 
 ## Assessment and Questions
 
@@ -627,6 +697,9 @@ When testing, verify that:
 - [ ] Clear learning objectives stated
 - [ ] Content organized with headings
 - [ ] Steps are digestible (not too long)
+- [ ] **At least 2-3 quizzes** included (one after each major concept)
+- [ ] **At least 1-2 images** included (no text-only resources)
+- [ ] No section is more than a few sentences without a quiz or image
 - [ ] All images have complete metadata
 - [ ] All videos have complete metadata
 - [ ] Quizzes placed at appropriate checkpoints
@@ -657,7 +730,9 @@ For choice questions:
 
 For free text questions:
 - [ ] Expected answer captures the correct response
-- [ ] Input restriction matches the expected answer type (text/integer/decimal)
+- [ ] Input restriction matches the expected answer type (text/integer/decimal/fraction)
+- [ ] Min/Max values set if a numeric range is appropriate
+- [ ] Allow Negative set correctly for numeric types
 - [ ] Evaluation criteria added if flexibility is needed
 
 For all quizzes:

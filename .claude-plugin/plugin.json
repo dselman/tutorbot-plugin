@@ -1,7 +1,7 @@
 {
   "name": "tutorbot",
-  "version": "1.0.0",
-  "description": "TutorBot lesson authoring plugin - create educational resources with AI-powered delivery via voice conversation or presentation mode",
+  "version": "1.1.0",
+  "description": "TutorBot plugin - create educational resources and evaluate student performance with AI-powered delivery via voice conversation or presentation mode",
   "author": {
     "name": "Tornado Labs",
     "url": "https://tornadolabs.net"

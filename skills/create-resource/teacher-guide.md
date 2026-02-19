@@ -437,6 +437,8 @@ For details on how bots deliver lessons and how to write effective content for A
 
 ## Working with Images in Resources
 
+**Every resource should include at least 1-2 images.** Images are essential for engagement — they break up text, illustrate concepts, and give the bot concrete material to discuss with the student. A resource with no images will feel text-heavy and lecture-like, even with great written content.
+
 When creating resources, you can add images to enhance learning. By default, the AI bot relies on text descriptions you provide for each image.
 
 ### Bot Vision Feature
@@ -453,7 +455,9 @@ For comprehensive guidance on writing effective content and working with media, 
 
 ## Working with Quizzes in Resources
 
-Quizzes provide a structured way to test student understanding during lessons. The platform supports three question types: single choice, multiple choice, and free text.
+**Quizzes are essential for interactive, engaging lessons.** Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes keep students actively thinking and participating — without them, lessons feel passive and text-heavy. Use a variety of quiz types (single choice, multiple choice, free text, fraction) to keep things interesting.
+
+The platform supports three question types: single choice, multiple choice, and free text.
 
 ### Quiz Question Types
 
@@ -464,8 +468,11 @@ Quizzes provide a structured way to test student understanding during lessons. T
 - Best for "select all that apply" questions
 
 **Free Text**: Student types their answer, evaluated by AI
-- Best for numerical answers, calculations, or short written responses
-- Supports input restrictions: Text, Integer, or Decimal
+- Best for numerical answers, calculations, fractions, or short written responses
+- Supports input restrictions: Text, Integer, Decimal, or Fraction
+- Numeric types (Integer, Decimal, Fraction) show an on-screen keypad instead of the native keyboard
+- Fraction input shows a visual numerator/denominator entry
+- Optional min/max range and allow-negative constraints for numeric types
 
 ### How Quizzes Work
 
@@ -486,7 +493,9 @@ When the AI tutor displays a quiz during a lesson:
    - **Question Type**: Single choice, Multiple choice, or Free text
    - **Answers**: The answer options with correct answers marked (choice questions)
    - **Expected Answer**: The correct answer to evaluate against (free text)
-   - **Input Restriction**: Text, Integer, or Decimal (free text)
+   - **Input Restriction**: Text, Integer, Decimal, or Fraction (free text)
+   - **Min/Max Value**: Optional range constraints for numeric types (free text)
+   - **Allow Negative**: Whether negative values are accepted (free text, numeric types)
    - **Evaluation Criteria**: Optional guidance for AI grading (free text)
    - **Retry Limit**: How many attempts students get (leave empty for unlimited)
    - **Hint**: Guidance for the bot to help struggling students
@@ -498,7 +507,7 @@ Use **quizzes** when you want:
 - Structured assessment with automatic correctness checking
 - Retry attempts with hints
 - Clear right/wrong feedback
-- Numerical or calculation-based questions (free text)
+- Numerical, calculation-based, or fraction questions (free text)
 
 Use **conversational questions** (in your content) when you want:
 - Open-ended discussion
@@ -521,10 +530,12 @@ For comprehensive guidance on creating effective quizzes, see the **Resource Gui
 2. **Apply tags consistently** to make resources easy to find
 3. **Choose the right delivery mode** - conversation for interactive lessons, presentation for lecture-style content
 4. **Choose the right progression type** - sequential for prerequisite content, flexible for independent topics
-5. **Monitor the activity feed** to identify students who may need help
-6. **Test resources and courses** before assigning to students to verify the AI delivers content correctly
-7. **Review session transcripts** periodically to understand how students interact with your content
-8. **Enable Bot Vision** for images where the AI needs to see visual details
-9. **Use quizzes strategically** to check understanding at key points in lessons
-10. **Match quiz types to content** - use free text for calculations, choice questions for factual recall
-11. **Provide helpful quiz hints** that guide students without giving away the answer
+5. **Include plenty of quizzes** - aim for at least 2-3 per resource. Quizzes are the primary way students actively engage with content. Lessons without enough quizzes feel passive and text-heavy.
+6. **Include images in every resource** - aim for at least 1-2 images. Visuals break up text, illustrate concepts, and keep students interested. A text-only resource is almost always too dry.
+7. **Avoid text-heavy sections** - if any section is more than a few sentences without a quiz or image, add interactivity
+8. **Mix quiz types for variety** - use single choice for quick checks, multiple choice for "select all", free text for calculations, and fraction for math. Variety keeps students engaged.
+9. **Monitor the activity feed** to identify students who may need help
+10. **Test resources and courses** before assigning to students to verify the AI delivers content correctly
+11. **Review session transcripts** periodically to understand how students interact with your content
+12. **Enable Bot Vision** for images where the AI needs to see visual details
+13. **Provide helpful quiz hints** that guide students without giving away the answer

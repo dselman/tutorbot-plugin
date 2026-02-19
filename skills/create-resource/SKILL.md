@@ -23,18 +23,20 @@ When this skill is invoked, follow these steps:
 2. **Design the Resource**: Based on the guides, create a structure with:
    - Clear learning objectives
    - Logical sections with headings
-   - Checkpoints for understanding (quizzes)
-   - Appropriate media placement
+   - **A quiz after every major concept or section** — aim for at least 2-3 quizzes per resource. Quizzes are the primary way students actively engage with the material, and lessons without them feel passive and text-heavy.
+   - **At least 1-2 images per resource** — visuals break up text, illustrate concepts, and give the bot something concrete to discuss with the student. A resource with no images is almost always too text-heavy.
+   - Mix quiz types for variety (single choice, multiple choice, free text, fraction)
 
 3. **Create Content**: Draft the markdown content following best practices:
    - Write instructions for the bot, not a script
    - Use "the student" with they/them pronouns
    - Keep sections digestible
+   - **IMPORTANT: Avoid text-heavy resources.** Every section should either have a quiz, an image, or both. If a section is just text with no interactivity, consider adding a quick quiz to check understanding or an image to illustrate the concept. Students learn best when they actively participate, not passively listen.
 
-4. **Generate Media** (if needed): Use image generation tools to create:
-   - Diagrams and illustrations
-   - Educational visuals
+4. **Generate Media**: Use image generation tools to create visuals for the resource. **Every resource should have images** — they are essential for engagement, not optional decoration.
+   - Diagrams, illustrations, and educational visuals
    - Upload via `upload_image_from_url` (preferred) or `create_image`
+   - Always provide complete metadata (description, question, answer, hint)
 
 5. **Execute Creation**: Use MCP tools to:
    - Create the resource via `create_resource`
@@ -125,7 +127,10 @@ Use the `tutorbot` MCP server tools:
 - `questionType` (required): `"single"`, `"multiple"`, or `"freetext"`
 - `answers` (for single/multiple): Array of `{id, text, isCorrect}`
 - `expectedAnswer` (for freetext): Correct answer
-- `inputRestriction` (for freetext): `"text"`, `"integer"`, or `"decimal"`
+- `inputRestriction` (for freetext): `"text"`, `"integer"`, `"decimal"`, or `"fraction"`
+- `numericMin` (optional): Minimum allowed value for numeric inputs (integer, decimal, fraction)
+- `numericMax` (optional): Maximum allowed value for numeric inputs (integer, decimal, fraction)
+- `allowNegative` (optional): Whether negative values are accepted (default: true)
 - `evaluationCriteria` (optional): AI grading guidelines
 - `retryLimit` (optional): Max attempts
 - `hint` (optional): Guidance for wrong answers
@@ -299,6 +304,20 @@ update_resource(
 }
 ```
 
+### Fraction
+```json
+{
+  "question": "What is 1/2 + 1/6?",
+  "questionType": "freetext",
+  "inputRestriction": "fraction",
+  "expectedAnswer": "2/3",
+  "numericMin": 0,
+  "numericMax": 1,
+  "allowNegative": false,
+  "evaluationCriteria": "Accept equivalent fractions (e.g. 4/6, 8/12)"
+}
+```
+
 ## Generating Images with AI
 
 For AI-generated images:
@@ -316,12 +335,14 @@ For AI-generated images:
 1. **Write for the bot, not the student** - The bot interprets your instructions and delivers them conversationally
 2. **Use clear headings** - Structure content with `#`, `##`, `###` for pacing
 3. **Keep resources short** - 5-10 minutes is ideal per resource; split longer content into multiple resources within a course
-4. **Provide complete media metadata** - Description, question, answer, and hint for every image
-5. **Place quizzes strategically** - After teaching the relevant content
-6. **Enable botVisible for important images** - Let the bot see diagrams and charts
-7. **Always embed references** - Images need `![ID](/api/v1/images/ID/data)` and quizzes need `::quiz{#ID}` in the content
-8. **Design resources to be self-contained** - Each resource should make sense on its own and be reusable across courses
-9. **Test your resources** - Use the Test Resource feature in the admin UI before assigning to students
+4. **Include plenty of quizzes** - Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes are the primary way to keep students actively engaged. A resource with fewer than 2 quizzes almost always feels too passive. Use a variety of quiz types (single choice, multiple choice, free text, fraction) to keep things interesting.
+5. **Include images in every resource** - Aim for **at least 1-2 images per resource**. Visuals break up text, illustrate concepts, and give the bot concrete material to discuss. Text-only resources feel dry and lecture-like.
+6. **Provide complete media metadata** - Description, question, answer, and hint for every image
+7. **Enable botVisible for important images** - Let the bot see diagrams and charts
+8. **Always embed references** - Images need `![ID](/api/v1/images/ID/data)` and quizzes need `::quiz{#ID}` in the content
+9. **Design resources to be self-contained** - Each resource should make sense on its own and be reusable across courses
+10. **Avoid text-heavy content** - If any section of your resource is more than a few sentences without a quiz or image, it's probably too text-heavy. Add interactivity.
+11. **Test your resources** - Use the Test Resource feature in the admin UI before assigning to students
 
 ## Additional Resources
 

@@ -12,8 +12,8 @@
     {
       "name": "tutorbot",
       "source": ".",
-      "description": "Create educational lessons with images, quizzes, and courses for AI-powered voice delivery to students",
-      "version": "1.0.0",
+      "description": "Create educational lessons and evaluate student performance with images, quizzes, and courses for AI-powered voice delivery to students",
+      "version": "1.1.0",
       "author": {
         "name": "Tornado Labs"
       },
@@ -22,7 +22,7 @@
       "license": "MIT",
       "keywords": ["education", "tutoring", "lesson-authoring"],
       "category": "education",
-      "tags": ["education", "ai-tutor", "lesson-creation", "voice-learning"]
+      "tags": ["education", "ai-tutor", "lesson-creation", "voice-learning", "student-evaluation"]
     }
   ]
 }
