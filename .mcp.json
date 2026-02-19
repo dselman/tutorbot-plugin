@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tutorbot": {
+      "type": "url",
+      "url": "https://tutor-bot-api-ae16d89e1dc5.herokuapp.com/mcp"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "tutorbot",
+  "version": "1.0.0",
+  "description": "TutorBot lesson authoring plugin - create educational resources with AI-powered delivery via voice conversation or presentation mode",
+  "author": {
+    "name": "Tornado Labs",
+    "url": "https://tornadolabs.net"
+  },
+  "homepage": "https://tornadolabs.net",
+  "repository": "https://github.com/dselman/tutorbot-plugin",
+  "license": "MIT",
+  "keywords": ["education", "tutoring", "lesson-authoring", "ai-tutor", "voice-learning"]
+}

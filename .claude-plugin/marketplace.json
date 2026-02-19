@@ -1,0 +1,28 @@
+{
+  "name": "tutorbot-marketplace",
+  "owner": {
+    "name": "Tornado Labs",
+    "email": "support@tornadolabs.net"
+  },
+  "metadata": {
+    "description": "TutorBot plugins for AI-powered educational content creation",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "tutorbot",
+      "source": ".",
+      "description": "Create educational lessons with images, quizzes, and courses for AI-powered voice delivery to students",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tornado Labs"
+      },
+      "homepage": "https://tornadolabs.net",
+      "repository": "https://github.com/dselman/tutorbot-plugin",
+      "license": "MIT",
+      "keywords": ["education", "tutoring", "lesson-authoring"],
+      "category": "education",
+      "tags": ["education", "ai-tutor", "lesson-creation", "voice-learning"]
+    }
+  ]
+}
