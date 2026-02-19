@@ -5,7 +5,7 @@ A Claude Code plugin for creating educational resources on the [TutorBot](https:
 ## What This Plugin Provides
 
 - **MCP Server Connection**: Connects to the TutorBot API for resource management (create/update resources, upload images, create quizzes, manage courses)
-- **Authoring Skill**: The `create-lesson` skill teaches Claude how to structure educational resources with proper markdown syntax for embedding images and quizzes
+- **Authoring Skill**: The `create-resource` skill teaches Claude how to structure educational resources with proper markdown syntax for embedding images and quizzes
 
 ## Installation
 
@@ -27,7 +27,7 @@ In Claude Code:
 
 Once installed, invoke the skill:
 ```
-/tutorbot:create-lesson
+/tutorbot:create-resource
 ```
 
 Claude will guide you through creating a resource by asking about the topic, audience, delivery mode, and learning objectives. It then uses the MCP tools to create the resource, upload images, create quizzes, and embed everything into the content.

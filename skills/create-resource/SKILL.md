@@ -1,5 +1,5 @@
 ---
-name: create-lesson
+name: create-resource
 description: Create educational content (resources and courses) for the TutorBot SaaS application. Use when the user wants to create resources, courses, quizzes, or upload images for AI-powered voice delivery.
 user_invocable: true
 ---
