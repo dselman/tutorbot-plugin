@@ -136,11 +136,55 @@ Use the `tutorbot` MCP server tools:
 - `description` (optional): Course description
 - `tags` (optional): Array of tags
 - `progressionType` (optional): `"flexible"`, `"sequential"`, or `"random"`
+- `openEnrollment` (optional): If true, students can self-enroll from the course catalog
+- `defaultTeacher` (optional): User ID of the teacher assigned to self-enrolled students (required when openEnrollment is true)
+- `maxEnrollments` (optional): Maximum number of students who can enroll (null = unlimited)
+- `priceCents` (optional): Price in cents for paid courses (requires Stripe Connect)
+- `currency` (optional): Currency code for paid courses (e.g., `"GBP"`, `"USD"`, `"EUR"`)
+- `teacherOnly` (optional): If true, course is only visible to teachers in the catalog (preview mode)
 
 **add_resource_to_course:**
 - `courseId` (required): Course ID
 - `resourceId` (required): Resource ID to add
-- `order` (optional): Position in the course
+- `order` (optional): Position in the course (important for sequential courses)
+- `bot` (optional): Override the course's default bot for this specific resource
+- `deliveryMode` (optional): Override the resource's default delivery mode within this course
+
+## Organizing Resources into Courses
+
+Courses group related resources together for students to complete. When creating a course, consider:
+
+### Progression Types
+
+| Type | Behavior | Best For |
+|------|----------|----------|
+| **Flexible** | Students complete resources in any order | Independent topics, reference materials |
+| **Sequential** | Students must follow the specified order | Prerequisite content, building-block skills |
+| **Random** | System selects the next resource | Practice drills, varied review |
+
+### Course Design Tips
+
+- **Use sequential progression** when earlier resources teach concepts needed for later ones
+- **Use flexible progression** when resources cover independent topics within a theme
+- **Set resource order** carefully for sequential courses - use the `order` parameter in `add_resource_to_course`
+- **Override the bot** for specific resources if a different AI persona or expertise is needed
+- **Override delivery mode** per resource if some topics work better as conversation vs presentation
+- **Keep courses focused** - 3-8 resources per course is a good range
+- **Use consistent tags** across resources and courses for easy organization
+
+### Open Enrollment
+
+Enable open enrollment to let students self-enroll from the course catalog:
+- Requires a `defaultTeacher` to be assigned for managing self-enrolled students
+- Optionally set `maxEnrollments` to cap capacity
+- Set `teacherOnly: true` to preview the course before releasing to students
+
+### Paid Courses
+
+If the organization has Stripe Connect configured:
+- Set `priceCents` and `currency` to create a paid course
+- Open enrollment must be enabled for paid courses
+- Students go through Stripe checkout and are automatically enrolled after payment
 
 ## CRITICAL: Embedding Media and Quizzes in Resource Content
 
