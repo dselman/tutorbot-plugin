@@ -455,9 +455,9 @@ For comprehensive guidance on writing effective content and working with media, 
 
 ## Working with Quizzes in Resources
 
-**Quizzes are essential for interactive, engaging lessons.** Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes keep students actively thinking and participating — without them, lessons feel passive and text-heavy. Use a variety of quiz types (single choice, multiple choice, open answer, fraction) to keep things interesting.
+**Quizzes are essential for interactive, engaging lessons.** Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes keep students actively thinking and participating — without them, lessons feel passive and text-heavy. Use a variety of quiz types (single choice, multiple choice, open answer, ordered list) to keep things interesting.
 
-The platform supports three question types: single choice, multiple choice, and open answer.
+The platform supports four question types: single choice, multiple choice, open answer, and ordered list.
 
 ### Quiz Question Types
 
@@ -473,6 +473,12 @@ The platform supports three question types: single choice, multiple choice, and 
 - Numeric types (Integer, Decimal, Fraction) show an on-screen keypad instead of the native keyboard
 - Fraction input shows a visual numerator/denominator entry
 - Optional min/max range and allow-negative constraints for numeric types
+
+**Ordered List**: Student arranges items in the correct order using drag and drop
+- Best for sequencing steps, ordering events, ranking values, comparing numbers
+- Items are shuffled for the student; they drag them into the correct position
+- Partial credit scoring: score based on how many items are in the correct position
+- Example: "Put these in order from smallest to largest: 3/5, 0.55, 62%, 1/2"
 
 ### How Quizzes Work
 

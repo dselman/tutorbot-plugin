@@ -318,6 +318,23 @@ update_resource(
 }
 ```
 
+### Ordered List
+Students drag and drop items into the correct sequence. The answers array order defines the correct sequence — students see items shuffled.
+```json
+{
+  "question": "Put these in order from smallest to largest",
+  "questionType": "ordered_list",
+  "answers": [
+    { "id": "a", "text": "1/2", "isCorrect": false },
+    { "id": "b", "text": "0.55", "isCorrect": false },
+    { "id": "c", "text": "3/5", "isCorrect": false },
+    { "id": "d", "text": "62%", "isCorrect": false }
+  ],
+  "hint": "Convert everything to decimals to compare"
+}
+```
+Note: `isCorrect` is ignored for ordered_list — the array order IS the correct answer. Minimum 2 items, maximum 10.
+
 ## Generating Images with AI
 
 For AI-generated images:

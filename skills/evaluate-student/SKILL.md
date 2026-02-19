@@ -258,7 +258,7 @@ Based on analysis of [N] lesson sessions:
 When analyzing transcripts from `get_transcript`, look for these specific patterns:
 
 ### Quiz Performance
-- Extract entries with type `quiz_response` or `freetext_response`
+- Extract entries with type `quiz_response`, `freetext_response`, or `ordered_list_response`
 - Calculate **first-attempt accuracy**: correct on first try vs. needed retries
 - Note **wrong answer patterns**: do multiple students choose the same wrong answer? (indicates confusing question or common misconception)
 - Track **score progression**: are scores improving across the session?

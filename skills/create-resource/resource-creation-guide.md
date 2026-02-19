@@ -403,6 +403,12 @@ Quizzes provide structured assessment with automatic correctness checking. The p
 - The AI compares the student's answer against your expected answer
 - Provides intelligent feedback even for partially correct answers
 
+**Ordered List**: Students drag and drop items into the correct sequence
+- Best for: Ordering events, ranking items, sequencing steps, comparing values
+- Example: "Put these in order from smallest to largest: 3/5, 0.55, 62%, 1/2"
+- Items are shuffled for the student; they must arrange them in the correct order
+- Partial credit: score based on how many items are in the correct position
+
 ### Adding a Quiz
 
 1. Position your cursor where you want the quiz in the lesson flow
@@ -410,7 +416,7 @@ Quizzes provide structured assessment with automatic correctness checking. The p
 3. Fill in the quiz fields:
    - **Description**: When the bot should use this quiz
    - **Question**: The question text shown to students
-   - **Question Type**: Single choice, Multiple choice, or Open answer
+   - **Question Type**: Single choice, Multiple choice, Open answer, or Ordered list
    - **Answers** (for choice questions): The answer options
    - **Expected Answer** (for open answer): The correct answer to evaluate against
    - **Input Restriction** (for open answer): Text, Integer, Decimal, or Fraction
@@ -429,7 +435,7 @@ The quiz appears as a directive in your content (e.g., `::quiz{#123}`). Don't ed
 |-------|---------|
 | **Description** | Tells the bot when and why to present this quiz. The bot uses this to decide the right moment. |
 | **Question** | The actual question text the student sees. Keep it clear and unambiguous. |
-| **Question Type** | "Single" for one answer, "Multiple" for selecting all correct answers, "Open answer" for typed responses. |
+| **Question Type** | "Single" for one answer, "Multiple" for selecting all correct answers, "Open answer" for typed responses, "Ordered list" for drag-and-drop sequencing. |
 | **Answers** | List of options with correct answers marked. (Single/Multiple choice only) |
 | **Expected Answer** | The correct answer the AI evaluates against. (Open answer only) |
 | **Input Restriction** | What type of input is allowed: "Text" (any text), "Integer" (whole numbers), "Decimal" (numbers with decimals), or "Fraction" (e.g. 1/3). (Open answer only) |
