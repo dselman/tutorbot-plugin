@@ -13,7 +13,7 @@ When you create a resource, you're writing instructions for an AI bot that will 
 - **Bot**: The AI that delivers your lesson to students
 - **Resource**: A single learning unit containing content for the bot to deliver
 - **Course**: A collection of resources organized for students to complete
-- **Quiz**: A structured question with automatic correctness checking (supports single choice, multiple choice, and free text answers)
+- **Quiz**: A structured question with automatic correctness checking (supports single choice, multiple choice, and open answer answers)
 - **Assessment**: The AI-generated summary and grading of a completed resource
 - **Delivery Mode**: How the resource is presented - either as a two-way voice conversation or a one-way presentation
 
@@ -227,7 +227,7 @@ Follow these density guidelines:
 - Add a quick quiz after each concept to check understanding
 - Add an image or diagram to illustrate the key idea in each section
 - Split long explanatory sections into shorter ones with interactivity between them
-- Use a variety of quiz types (single choice for quick checks, free text for calculations, fraction for math) to keep things fresh
+- Use a variety of quiz types (single choice for quick checks, open answer for calculations, fraction for math) to keep things fresh
 
 ### Recommended Length
 
@@ -366,7 +366,7 @@ Remember that you must describe everything important in the video's description 
 
 ## Working with Quizzes
 
-Quizzes provide structured assessment with automatic correctness checking. The platform supports three question types: single choice, multiple choice, and free text.
+Quizzes provide structured assessment with automatic correctness checking. The platform supports three question types: single choice, multiple choice, and open answer.
 
 ### When to Use Quizzes
 
@@ -398,7 +398,7 @@ Quizzes provide structured assessment with automatic correctness checking. The p
 - Best for: "Select all that apply" questions, identifying multiple correct items
 - Example: "Which are prime numbers?" (2, 3, 5, 7)
 
-**Free Text**: Students type their answer, which is evaluated by AI
+**Open Answer**: Students type their answer, which is evaluated by AI
 - Best for: Numerical answers, short written responses, calculations
 - The AI compares the student's answer against your expected answer
 - Provides intelligent feedback even for partially correct answers
@@ -410,13 +410,13 @@ Quizzes provide structured assessment with automatic correctness checking. The p
 3. Fill in the quiz fields:
    - **Description**: When the bot should use this quiz
    - **Question**: The question text shown to students
-   - **Question Type**: Single choice, Multiple choice, or Free text
+   - **Question Type**: Single choice, Multiple choice, or Open answer
    - **Answers** (for choice questions): The answer options
-   - **Expected Answer** (for free text): The correct answer to evaluate against
-   - **Input Restriction** (for free text): Text, Integer, Decimal, or Fraction
+   - **Expected Answer** (for open answer): The correct answer to evaluate against
+   - **Input Restriction** (for open answer): Text, Integer, Decimal, or Fraction
    - **Min/Max Value** (for numeric types): Optional range constraints
    - **Allow Negative** (for numeric types): Whether negative values are accepted
-   - **Evaluation Criteria** (for free text): Optional guidance for AI grading
+   - **Evaluation Criteria** (for open answer): Optional guidance for AI grading
    - **Retry Limit**: Number of attempts allowed
    - **Hint**: Guidance for incorrect attempts
 4. Click **Save**
@@ -429,19 +429,19 @@ The quiz appears as a directive in your content (e.g., `::quiz{#123}`). Don't ed
 |-------|---------|
 | **Description** | Tells the bot when and why to present this quiz. The bot uses this to decide the right moment. |
 | **Question** | The actual question text the student sees. Keep it clear and unambiguous. |
-| **Question Type** | "Single" for one answer, "Multiple" for selecting all correct answers, "Free text" for typed responses. |
+| **Question Type** | "Single" for one answer, "Multiple" for selecting all correct answers, "Open answer" for typed responses. |
 | **Answers** | List of options with correct answers marked. (Single/Multiple choice only) |
-| **Expected Answer** | The correct answer the AI evaluates against. (Free text only) |
-| **Input Restriction** | What type of input is allowed: "Text" (any text), "Integer" (whole numbers), "Decimal" (numbers with decimals), or "Fraction" (e.g. 1/3). (Free text only) |
-| **Min/Max Value** | Optional range constraints for numeric input types (Integer, Decimal, Fraction). For fractions, the range applies to the evaluated decimal value. (Free text only) |
-| **Allow Negative** | Whether negative values are accepted. Default: yes. (Free text with numeric input types only) |
-| **Evaluation Criteria** | Optional guidance for the AI on how strictly to evaluate answers. (Free text only) |
+| **Expected Answer** | The correct answer the AI evaluates against. (Open answer only) |
+| **Input Restriction** | What type of input is allowed: "Text" (any text), "Integer" (whole numbers), "Decimal" (numbers with decimals), or "Fraction" (e.g. 1/3). (Open answer only) |
+| **Min/Max Value** | Optional range constraints for numeric input types (Integer, Decimal, Fraction). For fractions, the range applies to the evaluated decimal value. (Open answer only) |
+| **Allow Negative** | Whether negative values are accepted. Default: yes. (Open answer with numeric input types only) |
+| **Evaluation Criteria** | Optional guidance for the AI on how strictly to evaluate answers. (Open answer only) |
 | **Retry Limit** | How many attempts before moving on. Leave empty for unlimited retries. |
 | **Hint** | What the bot tells students after an incorrect answer to guide them. |
 
-### Free Text Input Restrictions
+### Open Answer Input Restrictions
 
-When creating free text questions, choose the appropriate input restriction:
+When creating open answer questions, choose the appropriate input restriction:
 
 | Restriction | Use Case | Examples |
 |-------------|----------|----------|
@@ -460,9 +460,9 @@ For numeric types (Integer, Decimal, Fraction), you can also set:
 - **Min/Max Value**: Constrain the acceptable range. For fractions, this applies to the evaluated decimal value (e.g. min=0, max=1 means 1/3 is valid but 5/3 is not)
 - **Allow Negative**: Toggle whether negative values are accepted (default: yes)
 
-### Free Text Evaluation
+### Open Answer Evaluation
 
-For free text questions, an AI evaluates student responses by comparing them to your expected answer. The AI:
+For open answer questions, an AI evaluates student responses by comparing them to your expected answer. The AI:
 - Understands equivalent answers (e.g., "8" and "eight" can both be correct)
 - Provides a correctness score (0-100%)
 - Generates brief, encouraging feedback
@@ -501,19 +501,19 @@ Answers:
   ✗ Glucose
 ```
 
-**Good free text question (decimal):**
+**Good open answer question (decimal):**
 ```
 Question: Calculate 15% of 80.
-Type: Free text
+Type: Open answer
 Input Restriction: Decimal
 Expected Answer: 12
 Evaluation Criteria: Accept 12, 12.0, or 12.00
 ```
 
-**Good free text question (fraction):**
+**Good open answer question (fraction):**
 ```
 Question: What is 1/2 + 1/6?
-Type: Free text
+Type: Open answer
 Input Restriction: Fraction
 Expected Answer: 2/3
 Min Value: 0
@@ -528,7 +528,7 @@ Evaluation Criteria: Accept equivalent fractions (e.g. 4/6, 8/12)
 - Make incorrect options plausible but clearly wrong
 - Test understanding, not trick questions
 
-**Tips for free text questions:**
+**Tips for open answer questions:**
 - Use Integer restriction for whole number answers
 - Use Decimal restriction for calculations that may have decimals
 - Use Fraction restriction for fraction answers (e.g. 1/3, 2/5) - the system checks equivalence automatically
@@ -590,10 +590,10 @@ When the bot displays a quiz:
 - **Include quizzes generously** — aim for at least 2-3 per resource, one after each major concept
 - **Place quizzes after teaching** the relevant content, not before
 - **Start with easier questions** and progress to harder ones
-- **Vary quiz types** for engagement — mix single choice, multiple choice, free text, and fraction questions
+- **Vary quiz types** for engagement — mix single choice, multiple choice, open answer, and fraction questions
 - **Provide meaningful hints** that teach, not just hint
 - **Test your quizzes** to ensure the flow feels natural
-- **Match question type to content** — use single choice for quick fact checks, free text for calculations, fraction for math
+- **Match question type to content** — use single choice for quick fact checks, open answer for calculations, fraction for math
 
 ## Assessment and Questions
 
@@ -722,13 +722,13 @@ For each image or video:
 For each quiz:
 - [ ] Description tells bot when to use it
 - [ ] Question is clear and unambiguous
-- [ ] Question type matches the content (single, multiple, or free text)
+- [ ] Question type matches the content (single, multiple, or open answer)
 
 For choice questions:
 - [ ] Correct answer(s) marked appropriately
 - [ ] Wrong answers are plausible but clearly incorrect
 
-For free text questions:
+For open answer questions:
 - [ ] Expected answer captures the correct response
 - [ ] Input restriction matches the expected answer type (text/integer/decimal/fraction)
 - [ ] Min/Max values set if a numeric range is appropriate

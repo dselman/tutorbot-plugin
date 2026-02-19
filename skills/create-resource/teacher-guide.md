@@ -455,9 +455,9 @@ For comprehensive guidance on writing effective content and working with media, 
 
 ## Working with Quizzes in Resources
 
-**Quizzes are essential for interactive, engaging lessons.** Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes keep students actively thinking and participating — without them, lessons feel passive and text-heavy. Use a variety of quiz types (single choice, multiple choice, free text, fraction) to keep things interesting.
+**Quizzes are essential for interactive, engaging lessons.** Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes keep students actively thinking and participating — without them, lessons feel passive and text-heavy. Use a variety of quiz types (single choice, multiple choice, open answer, fraction) to keep things interesting.
 
-The platform supports three question types: single choice, multiple choice, and free text.
+The platform supports three question types: single choice, multiple choice, and open answer.
 
 ### Quiz Question Types
 
@@ -467,7 +467,7 @@ The platform supports three question types: single choice, multiple choice, and 
 **Multiple Choice**: Student selects all correct answers from a list
 - Best for "select all that apply" questions
 
-**Free Text**: Student types their answer, evaluated by AI
+**Open Answer**: Student types their answer, evaluated by AI
 - Best for numerical answers, calculations, fractions, or short written responses
 - Supports input restrictions: Text, Integer, Decimal, or Fraction
 - Numeric types (Integer, Decimal, Fraction) show an on-screen keypad instead of the native keyboard
@@ -479,7 +479,7 @@ The platform supports three question types: single choice, multiple choice, and 
 When the AI tutor displays a quiz during a lesson:
 1. The student sees the question (with options or a text input)
 2. The student selects their answer(s) or types their response
-3. The system checks correctness (AI evaluates free text answers)
+3. The system checks correctness (AI evaluates open answer answers)
 4. The bot receives feedback about whether the student answered correctly
 5. If incorrect and retries are allowed, the bot can encourage another attempt using the hint you provided
 
@@ -490,13 +490,13 @@ When the AI tutor displays a quiz during a lesson:
 3. Fill in the quiz details:
    - **Description**: Tells the bot when to use this quiz
    - **Question**: The question text shown to students
-   - **Question Type**: Single choice, Multiple choice, or Free text
+   - **Question Type**: Single choice, Multiple choice, or Open answer
    - **Answers**: The answer options with correct answers marked (choice questions)
-   - **Expected Answer**: The correct answer to evaluate against (free text)
-   - **Input Restriction**: Text, Integer, Decimal, or Fraction (free text)
-   - **Min/Max Value**: Optional range constraints for numeric types (free text)
-   - **Allow Negative**: Whether negative values are accepted (free text, numeric types)
-   - **Evaluation Criteria**: Optional guidance for AI grading (free text)
+   - **Expected Answer**: The correct answer to evaluate against (open answer)
+   - **Input Restriction**: Text, Integer, Decimal, or Fraction (open answer)
+   - **Min/Max Value**: Optional range constraints for numeric types (open answer)
+   - **Allow Negative**: Whether negative values are accepted (open answer, numeric types)
+   - **Evaluation Criteria**: Optional guidance for AI grading (open answer)
    - **Retry Limit**: How many attempts students get (leave empty for unlimited)
    - **Hint**: Guidance for the bot to help struggling students
 4. Click **Save**
@@ -507,7 +507,7 @@ Use **quizzes** when you want:
 - Structured assessment with automatic correctness checking
 - Retry attempts with hints
 - Clear right/wrong feedback
-- Numerical, calculation-based, or fraction questions (free text)
+- Numerical, calculation-based, or fraction questions (open answer)
 
 Use **conversational questions** (in your content) when you want:
 - Open-ended discussion
@@ -519,7 +519,7 @@ Use **conversational questions** (in your content) when you want:
 Quiz responses are captured in session transcripts. When viewing a transcript:
 - Quiz displays show when the bot presented each quiz
 - Quiz responses show what the student selected/typed and whether it was correct
-- Free text responses include the AI's feedback and score
+- Open answer responses include the AI's feedback and score
 - You can see how many attempts were needed
 
 For comprehensive guidance on creating effective quizzes, see the **Resource Guide**.
@@ -533,7 +533,7 @@ For comprehensive guidance on creating effective quizzes, see the **Resource Gui
 5. **Include plenty of quizzes** - aim for at least 2-3 per resource. Quizzes are the primary way students actively engage with content. Lessons without enough quizzes feel passive and text-heavy.
 6. **Include images in every resource** - aim for at least 1-2 images. Visuals break up text, illustrate concepts, and keep students interested. A text-only resource is almost always too dry.
 7. **Avoid text-heavy sections** - if any section is more than a few sentences without a quiz or image, add interactivity
-8. **Mix quiz types for variety** - use single choice for quick checks, multiple choice for "select all", free text for calculations, and fraction for math. Variety keeps students engaged.
+8. **Mix quiz types for variety** - use single choice for quick checks, multiple choice for "select all", open answer for calculations, and fraction for math. Variety keeps students engaged.
 9. **Monitor the activity feed** to identify students who may need help
 10. **Test resources and courses** before assigning to students to verify the AI delivers content correctly
 11. **Review session transcripts** periodically to understand how students interact with your content

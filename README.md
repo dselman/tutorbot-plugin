@@ -37,7 +37,7 @@ Claude will guide you through creating a resource by asking about the topic, aud
 - **Resource**: A self-contained learning unit with markdown content, images, and quizzes
 - **Course**: A collection of resources organized for students to complete
 - **Delivery Mode**: How the resource is presented - `conversation` (two-way voice) or `presentation` (one-way narration)
-- **Quiz**: Structured assessment with single choice, multiple choice, or free text questions
+- **Quiz**: Structured assessment with single choice, multiple choice, or open answer questions
 
 ## MCP Tools Available
 
