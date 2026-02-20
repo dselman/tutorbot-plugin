@@ -1,6 +1,6 @@
 ---
 name: create-resource
-description: Create educational content (resources and courses) for the TutorBot SaaS application. Use when the user wants to create resources, courses, quizzes, or upload images for AI-powered voice delivery.
+description: Create educational content (resources and courses) for the TutorBot SaaS application. Use when the user wants to create resources, courses, quizzes, or upload images/PDFs for AI-powered voice delivery.
 user_invocable: true
 ---
 
@@ -18,14 +18,14 @@ When this skill is invoked, follow these steps:
    - Delivery mode preference (conversation or presentation)
    - Desired length (default: 5-10 minutes)
    - Any specific learning objectives
-   - Whether they want AI-generated images or have URLs to images
+   - Whether they want AI-generated images or have URLs to images/PDFs
 
 2. **Design the Resource**: Based on the guides, create a structure with:
    - Clear learning objectives
    - Logical sections with headings
    - **A quiz after every major concept or section** — aim for at least 2-3 quizzes per resource. Quizzes are the primary way students actively engage with the material, and lessons without them feel passive and text-heavy.
    - **At least 1-2 images per resource** — visuals break up text, illustrate concepts, and give the bot something concrete to discuss with the student. A resource with no images is almost always too text-heavy.
-   - Mix quiz types for variety (single choice, multiple choice, open answer, fraction)
+   - Mix quiz types for variety (single choice, multiple choice, open answer, fraction, ordered list)
 
 3. **Create Content**: Draft the markdown content following best practices:
    - Write instructions for the bot, not a script
@@ -35,8 +35,10 @@ When this skill is invoked, follow these steps:
 
 4. **Generate Media**: Use image generation tools to create visuals for the resource. **Every resource should have images** — they are essential for engagement, not optional decoration.
    - Diagrams, illustrations, and educational visuals
+   - PDFs for worksheets, reference materials, and supplementary reading (max 20 MB)
    - Upload via `upload_image_from_url` (preferred) or `create_image`
    - Always provide complete metadata (description, question, answer, hint)
+   - For PDFs: description is critical since the bot cannot read PDF content
 
 5. **Execute Creation**: Use MCP tools to:
    - Create the resource via `create_resource`
@@ -59,8 +61,8 @@ Use the `tutorbot` MCP server tools:
 | `get_resource` | Fetch a resource by ID |
 | `create_resource` | Create a new resource |
 | `update_resource` | Update an existing resource |
-| `create_image` | Upload an image (base64 data) to a resource |
-| `upload_image_from_url` | Upload an image from a URL to a resource (preferred for remote use) |
+| `create_image` | Upload an image or PDF (base64 data) to a resource |
+| `upload_image_from_url` | Upload an image or PDF from a URL to a resource (preferred for remote use) |
 | `create_quiz` | Create a quiz for a resource |
 | `list_tags` | List available tags |
 | `create_course` | Create a new course (collection of resources) |
@@ -113,7 +115,7 @@ Use the `tutorbot` MCP server tools:
 **create_image:**
 - `resourceId` (required): Resource to attach image to
 - `name` (required): Image filename
-- `mimeType` (required): e.g., `"image/png"`, `"image/jpeg"`
+- `mimeType` (required): e.g., `"image/png"`, `"image/jpeg"`, `"application/pdf"`
 - `data` (required): Base64-encoded image data
 - `description` (optional): What the image shows (important for bot)
 - `question` (optional): Question to ask about the image
@@ -124,7 +126,7 @@ Use the `tutorbot` MCP server tools:
 **create_quiz:**
 - `resourceId` (required): Resource to attach quiz to
 - `question` (required): Question text
-- `questionType` (required): `"single"`, `"multiple"`, or `"freetext"`
+- `questionType` (required): `"single"`, `"multiple"`, `"freetext"`, or `"ordered_list"`
 - `answers` (for single/multiple): Array of `{id, text, isCorrect}`
 - `expectedAnswer` (for freetext): Correct answer
 - `inputRestriction` (for freetext): `"text"`, `"integer"`, `"decimal"`, or `"fraction"`
@@ -352,7 +354,7 @@ For AI-generated images:
 1. **Write for the bot, not the student** - The bot interprets your instructions and delivers them conversationally
 2. **Use clear headings** - Structure content with `#`, `##`, `###` for pacing
 3. **Keep resources short** - 5-10 minutes is ideal per resource; split longer content into multiple resources within a course
-4. **Include plenty of quizzes** - Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes are the primary way to keep students actively engaged. A resource with fewer than 2 quizzes almost always feels too passive. Use a variety of quiz types (single choice, multiple choice, open answer, fraction) to keep things interesting.
+4. **Include plenty of quizzes** - Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes are the primary way to keep students actively engaged. A resource with fewer than 2 quizzes almost always feels too passive. Use a variety of quiz types (single choice, multiple choice, open answer, fraction, ordered list) to keep things interesting.
 5. **Include images in every resource** - Aim for **at least 1-2 images per resource**. Visuals break up text, illustrate concepts, and give the bot concrete material to discuss. Text-only resources feel dry and lecture-like.
 6. **Provide complete media metadata** - Description, question, answer, and hint for every image
 7. **Enable botVisible for important images** - Let the bot see diagrams and charts

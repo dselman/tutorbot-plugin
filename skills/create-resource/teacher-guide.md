@@ -449,7 +449,11 @@ For images where visual details matter, you can enable **"Bot can see this image
 - Enable Bot Vision for diagrams, charts, and complex visuals
 - Leave it off for decorative images or simple visuals with good descriptions
 - Always provide text descriptions even with Bot Vision enabled
-- Note: Bot Vision only works for images, not videos
+- Note: Bot Vision only works for images, not videos or PDFs
+
+### PDF Attachments
+
+You can also attach PDF files to resources for worksheets, reference materials, and supplementary reading. PDFs are uploaded through the same media panel as images and videos (max 20 MB). Since the bot cannot read PDFs, always provide a thorough description so the bot knows what the document contains. During lessons, students see a download card and can save the PDF to their device.
 
 For comprehensive guidance on writing effective content and working with media, see the **Resource Guide**.
 

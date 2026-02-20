@@ -13,7 +13,7 @@ When you create a resource, you're writing instructions for an AI bot that will 
 - **Bot**: The AI that delivers your lesson to students
 - **Resource**: A single learning unit containing content for the bot to deliver
 - **Course**: A collection of resources organized for students to complete
-- **Quiz**: A structured question with automatic correctness checking (supports single choice, multiple choice, and open answer answers)
+- **Quiz**: A structured question with automatic correctness checking (supports single choice, multiple choice, open answer, and ordered list)
 - **Assessment**: The AI-generated summary and grading of a completed resource
 - **Delivery Mode**: How the resource is presented - either as a two-way voice conversation or a one-way presentation
 
@@ -227,7 +227,7 @@ Follow these density guidelines:
 - Add a quick quiz after each concept to check understanding
 - Add an image or diagram to illustrate the key idea in each section
 - Split long explanatory sections into shorter ones with interactivity between them
-- Use a variety of quiz types (single choice for quick checks, open answer for calculations, fraction for math) to keep things fresh
+- Use a variety of quiz types (single choice for quick checks, open answer for calculations, fraction for math, ordered list for sequencing) to keep things fresh
 
 ### Recommended Length
 
@@ -308,7 +308,7 @@ By default, the bot relies entirely on your text descriptions. However, you can 
 - **Simple visuals** where your description is sufficient
 - **When lesson speed matters** (sending images adds processing time)
 
-**Note**: Bot Vision only works for images, not videos. Videos always rely on your text descriptions.
+**Note**: Bot Vision only works for images, not videos or PDFs. Videos and PDFs always rely on your text descriptions.
 
 Even with Bot Vision enabled, you should still provide a good description, question, answer, and hint. The text metadata helps structure the conversation, while the actual image allows the bot to notice and discuss details you might not have described.
 
@@ -364,9 +364,52 @@ Videos are most effective when:
 
 Remember that you must describe everything important in the video's description field for the bot to discuss it meaningfully.
 
+## Working with PDFs
+
+PDFs allow you to attach downloadable documents to your lessons — worksheets, reference materials, supplementary reading, or any document the student may need.
+
+### How to Upload
+
+Upload PDFs through the same media panel used for images and videos:
+
+1. Click **Choose Image, Video, or PDF** in the resource editor
+2. Select a PDF file (maximum 20 MB)
+3. The PDF will appear in the editor with a distinctive red border and PDF icon
+4. Click on it to open the side panel and configure metadata
+
+### Metadata Guidance
+
+Since the bot **cannot read PDFs**, the **Description** field is critical. Without a description, the bot has no idea what the PDF contains and cannot discuss it with the student.
+
+Write a thorough description that covers:
+- What the document is (worksheet, reference sheet, reading passage, etc.)
+- Key content or topics covered
+- How the student should use it
+
+```
+Description: A two-page worksheet on long division with 10
+practice problems. Problems start with simple single-digit
+divisors and progress to two-digit divisors. An answer key
+is included on the second page.
+```
+
+The **Question**, **Answer**, and **Hint** fields work the same as for images — use them to have the bot discuss or quiz the student about the PDF content.
+
+### Student Experience
+
+When the bot displays a PDF during a lesson, the student sees a download card with the filename and a download button. Clicking the button saves the PDF to their device. The bot will briefly describe what the PDF contains and encourage the student to download it.
+
+### When to Use PDFs
+
+PDFs are most effective for:
+- Worksheets and practice exercises
+- Reference materials and cheat sheets
+- Supplementary reading passages
+- Printed activities to complete offline
+
 ## Working with Quizzes
 
-Quizzes provide structured assessment with automatic correctness checking. The platform supports three question types: single choice, multiple choice, and open answer.
+Quizzes provide structured assessment with automatic correctness checking. The platform supports four question types: single choice, multiple choice, open answer, and ordered list.
 
 ### When to Use Quizzes
 
@@ -596,10 +639,10 @@ When the bot displays a quiz:
 - **Include quizzes generously** — aim for at least 2-3 per resource, one after each major concept
 - **Place quizzes after teaching** the relevant content, not before
 - **Start with easier questions** and progress to harder ones
-- **Vary quiz types** for engagement — mix single choice, multiple choice, open answer, and fraction questions
+- **Vary quiz types** for engagement — mix single choice, multiple choice, open answer, fraction, and ordered list questions
 - **Provide meaningful hints** that teach, not just hint
 - **Test your quizzes** to ensure the flow feels natural
-- **Match question type to content** — use single choice for quick fact checks, open answer for calculations, fraction for math
+- **Match question type to content** — use single choice for quick fact checks, open answer for calculations, fraction for math, ordered list for sequencing
 
 ## Assessment and Questions
 
@@ -728,7 +771,7 @@ For each image or video:
 For each quiz:
 - [ ] Description tells bot when to use it
 - [ ] Question is clear and unambiguous
-- [ ] Question type matches the content (single, multiple, or open answer)
+- [ ] Question type matches the content (single, multiple, open answer, or ordered list)
 
 For choice questions:
 - [ ] Correct answer(s) marked appropriately
