@@ -739,6 +739,44 @@ When testing, verify that:
 - **Sections are too long** - break them into smaller steps
 - **Learning objectives** aren't being met - restructure the content
 
+## Exporting and Importing Resources
+
+Resources can be exported as self-contained ZIP files and imported to create new resources. This enables sharing between organizations, backing up content, and migrating resources between environments.
+
+### What's in the ZIP
+
+An exported ZIP contains everything needed to recreate the resource:
+- `manifest.json` — resource metadata (name, tags, delivery mode) and media/quiz mappings
+- `content.md` — the markdown content with portable placeholder tokens
+- `media/` — all image, video, and PDF files
+- `quizzes/` — all quiz definitions as JSON files
+
+### Portable Tokens
+
+During export, database-specific IDs are replaced with portable tokens:
+- Image references like `![42](/api/v1/images/42/data)` become `![media-001](media://media-001)`
+- Quiz references like `::quiz{#28}` become `::quiz{#quiz-001}`
+
+During import, these tokens are mapped to newly created database IDs.
+
+### How to Export
+
+**From the resource editor:** Click **Download ZIP** in the right panel.
+
+**From the resource list:** Click the actions menu and select **Download ZIP**.
+
+**Via MCP:** Use the `export_resource` tool with the resource ID. Returns a base64-encoded ZIP.
+
+### How to Import
+
+**From the resource list:** Click **Import Resource** and select a `.zip` file.
+
+**Via MCP:** Use the `import_resource` tool with base64-encoded ZIP data.
+
+### Cross-Organization Portability
+
+Exported ZIPs are fully self-contained. Videos are stored as binary files in the ZIP and re-uploaded to the target organization's cloud storage on import. Image and quiz references are remapped to new IDs, so the imported resource is completely independent of the original.
+
 ## Quick Reference
 
 ### Resource Checklist

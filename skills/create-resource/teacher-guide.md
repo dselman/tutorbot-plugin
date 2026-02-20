@@ -61,9 +61,46 @@ The resource list provides:
 
 For each resource, you can:
 - **Edit**: Click the resource name to modify it
+- **Download ZIP**: Export the resource as a self-contained ZIP file (includes all media and quizzes)
 - **Test Resource**: Preview the resource with an AI tutor before assigning
 - **Assign to Student**: Quickly assign this resource to a specific student
 - **Delete**: Remove the resource (use with caution)
+
+### Exporting and Importing Resources
+
+You can export resources as self-contained ZIP files and import them back to create new resources. This is useful for sharing resources between organizations, backing up content, or migrating resources between environments.
+
+#### Exporting a Resource
+
+There are two ways to export:
+
+**From the Resource List:**
+1. Click the actions menu (three dots) on a resource
+2. Select **Download ZIP**
+
+**From the Resource Editor:**
+1. Open the resource for editing
+2. Click **Download ZIP** in the right panel
+
+The exported ZIP contains everything needed to recreate the resource:
+- Resource metadata (name, tags, delivery mode)
+- Markdown content
+- All media files (images, videos, PDFs)
+- All quiz definitions
+
+#### Importing a Resource
+
+1. Go to **Teaching > Resources**
+2. Click **Import Resource** (next to New Resource)
+3. Select a `.zip` file exported from TutorBot
+4. The system creates a new resource with all media and quizzes
+5. You're redirected to the new resource's edit page
+
+**Notes:**
+- Each import creates a new, separate resource (no deduplication)
+- Videos are re-uploaded to your organization's storage
+- The imported resource is fully independent — editing it won't affect the original
+- ZIP files can be imported into a different organization than they were exported from
 
 ### Testing a Resource
 

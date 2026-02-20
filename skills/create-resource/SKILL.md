@@ -65,6 +65,8 @@ Use the `tutorbot` MCP server tools:
 | `upload_image_from_url` | Upload an image or PDF from a URL to a resource (preferred for remote use) |
 | `create_quiz` | Create a quiz for a resource |
 | `list_tags` | List available tags |
+| `export_resource` | Export a resource as a base64-encoded ZIP (includes all media and quizzes) |
+| `import_resource` | Import a resource from a base64-encoded ZIP (creates a new resource) |
 | `create_course` | Create a new course (collection of resources) |
 | `list_courses` | List existing courses |
 | `add_resource_to_course` | Add a resource to a course |
@@ -92,6 +94,12 @@ Use the `tutorbot` MCP server tools:
 
 6. (Optional) add_resource_to_course(courseId, resourceId, order)
    → Adds resource to the course
+
+7. (Optional) export_resource(resourceId)
+   → Returns base64-encoded ZIP for backup or sharing
+
+8. (Optional) import_resource(zipData)
+   → Creates a new resource from a previously exported ZIP
 ```
 
 ### Tool Parameters
@@ -149,6 +157,15 @@ Use the `tutorbot` MCP server tools:
 - `priceCents` (optional): Price in cents for paid courses (requires Stripe Connect)
 - `currency` (optional): Currency code for paid courses (e.g., `"GBP"`, `"USD"`, `"EUR"`)
 - `teacherOnly` (optional): If true, course is only visible to teachers in the catalog (preview mode)
+
+**export_resource:**
+- `resourceId` (required): The resource ID to export
+- Returns: Base64-encoded ZIP containing manifest, content, media, and quizzes
+
+**import_resource:**
+- `zipData` (required): Base64-encoded ZIP file data (as produced by `export_resource`)
+- `fileName` (optional): Filename for the ZIP (default: `"import.zip"`)
+- Returns: The newly created resource (with ID and name)
 
 **add_resource_to_course:**
 - `courseId` (required): Course ID
