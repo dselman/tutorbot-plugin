@@ -6,28 +6,21 @@ A Claude Code plugin for creating educational resources on the [TutorBot](https:
 
 - **MCP Server Connection**: Connects to the TutorBot API for resource management (create/update resources, upload images, create quizzes, manage courses)
 - **Authoring Skill**: The `create-resource` skill teaches Claude how to structure educational resources with proper markdown syntax for embedding images and quizzes
+- **Evaluation Skill**: The `evaluate-student` skill helps analyse student performance across courses
 
 ## Installation
 
-### Via Marketplace URL
-
 In Claude Code:
 ```
-/plugin marketplace add dselman/tutorbot-plugin
-/plugin install tutorbot@tutorbot-marketplace
-```
-
-### Via Direct Install
-
-```
-/plugin install dselman/tutorbot-plugin
+/install-plugin dselman/tutorbot-plugin
 ```
 
 ## Usage
 
-Once installed, invoke the skill:
+Once installed, invoke the skills:
 ```
 /tutorbot:create-resource
+/tutorbot:evaluate-student
 ```
 
 Claude will guide you through creating a resource by asking about the topic, audience, delivery mode, and learning objectives. It then uses the MCP tools to create the resource, upload images, create quizzes, and embed everything into the content.
@@ -51,6 +44,8 @@ Claude will guide you through creating a resource by asking about the topic, aud
 | `upload_image_from_url` | Upload an image from URL to a resource |
 | `create_quiz` | Create a quiz for a resource |
 | `list_tags` | List available tags |
+| `export_resource` | Export a resource as a ZIP archive |
+| `import_resource` | Import a resource from a ZIP archive |
 | `create_course` | Create a course |
 | `list_courses` | List courses |
 | `add_resource_to_course` | Add a resource to a course |

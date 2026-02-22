@@ -257,6 +257,13 @@ Based on analysis of [N] lesson sessions:
 
 When analyzing transcripts from `get_transcript`, look for these specific patterns:
 
+### Lesson Feedback
+- Extract entries with type `lesson_feedback` — these are submitted by the student after the lesson ends
+- **Rating**: `up` (positive), `down` (negative), or `null` (skipped)
+- **Issues**: Array of issue keys the student flagged: `slow_response`, `audio_quality`, `microphone_problems`, `network_issues`, `media_timing`, `quiz_problems`, `content_difficulty`, `bot_confusion`
+- Use feedback data to contextualize performance: if a student flagged technical issues (audio, network, microphone), consider that their scores may not reflect true understanding
+- If multiple students report the same issue for a resource, flag it as a potential content or technical problem
+
 ### Quiz Performance
 - Extract entries with type `quiz_response`, `freetext_response`, or `ordered_list_response`
 - Calculate **first-attempt accuracy**: correct on first try vs. needed retries
