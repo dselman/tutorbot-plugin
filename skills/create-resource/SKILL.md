@@ -163,9 +163,100 @@ Use the `tutorbot` MCP server tools:
 - Returns: Base64-encoded ZIP containing manifest, content, media, and quizzes
 
 **import_resource:**
-- `zipData` (required): Base64-encoded ZIP file data (as produced by `export_resource`)
+- `zipData` (required): Base64-encoded ZIP file data matching the format below
 - `fileName` (optional): Filename for the ZIP (default: `"import.zip"`)
 - Returns: The newly created resource (with ID and name)
+
+### Resource Archive Format (for import/export)
+
+The ZIP file **must** have all files at the root level (no subdirectory wrapper) with this structure:
+
+```
+manifest.json        # Required: metadata and file references
+content.md           # Required: markdown content with portable tokens
+media/               # Media files (images, videos, PDFs)
+  media-001.png
+  media-002.jpeg
+quizzes/             # Quiz definitions
+  quiz-001.json
+  quiz-002.json
+```
+
+**CRITICAL**: Files must be at the ZIP root — NOT inside a subdirectory. A ZIP containing `my-resource/manifest.json` will fail; it must be just `manifest.json`.
+
+#### manifest.json format
+
+```json
+{
+  "version": 1,
+  "exportedAt": "2026-01-01T00:00:00.000Z",
+  "resource": {
+    "name": "Subtraction on a Number Line",
+    "tags": ["maths", "subtraction"],
+    "deliveryMode": "conversation"
+  },
+  "media": [
+    {
+      "ref": "media-001",
+      "filename": "media/media-001.png",
+      "name": "Number Line Diagram",
+      "mimeType": "image/png",
+      "description": "A number line showing 15 - 3 = 12",
+      "question": "Where do we land after 3 hops back from 15?",
+      "answer": "We land on 12",
+      "hint": "Count the arrows backwards",
+      "order": null,
+      "botVisible": true
+    }
+  ],
+  "quizzes": [
+    {
+      "ref": "quiz-001",
+      "filename": "quizzes/quiz-001.json"
+    }
+  ]
+}
+```
+
+Key rules:
+- `version` must be `1`
+- `media` and `quizzes` are **arrays** (not objects)
+- Each media entry must have a `ref` field (e.g. `"media-001"`) matching its portable token in content.md
+- Each quiz entry must have a `ref` field (e.g. `"quiz-001"`) matching its portable token in content.md
+- Media filenames must match their `mimeType` extension (e.g. `media-001.png` for `image/png`)
+- Only `image/png`, `image/jpeg`, and `application/pdf` are supported for images
+
+#### content.md portable tokens
+
+Content must use portable `media://` and `quiz` tokens (NOT database IDs):
+
+```markdown
+![media-001](media://media-001)
+
+::quiz{#quiz-001}
+```
+
+The importer replaces these tokens with real database IDs after creating the records.
+
+#### Quiz JSON format
+
+Each quiz file (e.g. `quizzes/quiz-001.json`) contains:
+
+```json
+{
+  "question": "What is 15 - 3?",
+  "questionType": "freetext",
+  "inputRestriction": "integer",
+  "expectedAnswer": "12",
+  "numericMin": 0,
+  "numericMax": 20,
+  "allowNegative": false,
+  "evaluationCriteria": "Accept only the number 12.",
+  "retryLimit": 3,
+  "hint": "Start at 15 and count back 3 hops.",
+  "description": "Quiz after the number line example."
+}
+```
 
 **add_resource_to_course:**
 - `courseId` (required): Course ID
