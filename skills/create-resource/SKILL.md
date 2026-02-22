@@ -123,7 +123,7 @@ Use the `tutorbot` MCP server tools:
 **create_image:**
 - `resourceId` (required): Resource to attach image to
 - `name` (required): Image filename
-- `mimeType` (required): e.g., `"image/png"`, `"image/jpeg"`, `"application/pdf"`
+- `mimeType` (required): Only `"image/png"`, `"image/jpeg"`, or `"application/pdf"` are supported
 - `data` (required): Base64-encoded image data
 - `description` (optional): What the image shows (important for bot)
 - `question` (optional): Question to ask about the image

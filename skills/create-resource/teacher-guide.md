@@ -474,7 +474,7 @@ For details on how bots deliver lessons and how to write effective content for A
 
 ## Working with Images in Resources
 
-**Every resource should include at least 1-2 images.** Images are essential for engagement — they break up text, illustrate concepts, and give the bot concrete material to discuss with the student. A resource with no images will feel text-heavy and lecture-like, even with great written content.
+**Every resource should include at least 1-2 images.** Images are essential for engagement — they break up text, illustrate concepts, and give the bot concrete material to discuss with the student. A resource with no images will feel text-heavy and lecture-like, even with great written content. Only **PNG** and **JPEG** image formats are supported (max 5 MB).
 
 When creating resources, you can add images to enhance learning. By default, the AI bot relies on text descriptions you provide for each image.
 

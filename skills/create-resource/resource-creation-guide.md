@@ -251,7 +251,7 @@ When you add an image, you must fill in four fields:
 ### Adding an Image
 
 1. Click the image button in the toolbar
-2. Select an image file (maximum 100 MB)
+2. Select an image file — only **PNG** and **JPEG** formats are supported (max 5 MB)
 3. The image appears in your content
 4. Click the image to open the settings panel
 5. Fill in all four metadata fields
