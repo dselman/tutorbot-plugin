@@ -301,26 +301,30 @@ Students appear with invitation status:
 
 ### Student Consent
 
-If your organization has configured a consent form (e.g., for parental consent), you'll see a **Consent** column in the student list with these statuses:
+If your organization has enabled parental consent (configured by your admin in **Settings > Students**), students must complete an on-platform consent form before accessing the dashboard. Consent is **automatically verified** when the parent submits the form — no manual approval is needed.
+
+You'll see a **Consent** column in the student list with these statuses:
 
 | Status | Description |
 |--------|-------------|
-| **N/A** | Consent not required for this student |
-| **Pending** | Student hasn't submitted the consent form yet |
-| **Submitted** | Student has submitted the form, awaiting verification |
-| **Verified** | Consent verified, student has full access |
+| **N/A** | Consent not required (consent not enabled, or non-student role) |
+| **Pending** | Consent required but parent hasn't submitted yet |
+| **Submitted** | Parent has submitted the form (auto-verified) |
+| **Verified** | Consent verified — student has full access |
 
 **Managing consent:**
 
 From the student list action menu (three dots), you can:
 
-- **Verify Consent** (for Submitted students): After confirming you've received the consent form, verify the student. They'll receive a welcome email with a sign-in link.
+- **Verify Consent** (for Pending or N/A students): Manually grant access — useful when consent was received through other means (e.g., paper forms).
 
-- **Resend Welcome Email** (for Verified students): If a student didn't receive or lost their welcome email, resend it.
+- **View Consent** (for Verified students): Review the submitted consent response, including parent name, checkbox answers, and custom question responses.
 
-- **Revoke Consent** (for Submitted or Verified students): If consent needs to be withdrawn, this blocks the student's access until they re-submit and are verified again.
+- **Resend Welcome Email** (for Verified students): Re-send the sign-in link if a student didn't receive or lost their welcome email.
 
-**Note**: Students cannot access their dashboard until their consent is verified. Contact your administrator if you need help with consent form configuration.
+- **Revoke Consent** (for Submitted or Verified students): Block the student's access by resetting consent to Pending. They must re-submit the consent form to regain access.
+
+**Note**: Students cannot access their dashboard until their consent status is Verified. Contact your administrator if you need help with consent form configuration.
 
 ### Student Details
 
@@ -537,7 +541,7 @@ When the AI tutor displays a quiz during a lesson:
 3. Fill in the quiz details:
    - **Description**: Tells the bot when to use this quiz
    - **Question**: The question text shown to students
-   - **Question Type**: Single choice, Multiple choice, or Open answer
+   - **Question Type**: Single choice, Multiple choice, Open answer, or Ordered list
    - **Answers**: The answer options with correct answers marked (choice questions)
    - **Expected Answer**: The correct answer to evaluate against (open answer)
    - **Input Restriction**: Text, Integer, Decimal, or Fraction (open answer)
@@ -580,7 +584,7 @@ For comprehensive guidance on creating effective quizzes, see the **Resource Gui
 5. **Include plenty of quizzes** - aim for at least 2-3 per resource. Quizzes are the primary way students actively engage with content. Lessons without enough quizzes feel passive and text-heavy.
 6. **Include images in every resource** - aim for at least 1-2 images. Visuals break up text, illustrate concepts, and keep students interested. A text-only resource is almost always too dry.
 7. **Avoid text-heavy sections** - if any section is more than a few sentences without a quiz or image, add interactivity
-8. **Mix quiz types for variety** - use single choice for quick checks, multiple choice for "select all", open answer for calculations, and fraction for math. Variety keeps students engaged.
+8. **Mix quiz types for variety** - use single choice for quick checks, multiple choice for "select all", open answer for calculations, ordered list for sequencing, and fraction for math. Variety keeps students engaged.
 9. **Monitor the activity feed** to identify students who may need help
 10. **Test resources and courses** before assigning to students to verify the AI delivers content correctly
 11. **Review session transcripts** periodically to understand how students interact with your content
