@@ -12,6 +12,12 @@ This skill helps you create educational resources for the TutorBot platform. Res
 
 When this skill is invoked, follow these steps:
 
+0. **Tag Governance** (before creating anything):
+   a. Call `list_tags(pageSize: 50)` to fetch the organization's tag catalog
+   b. Reuse existing tags where possible — do not create near-duplicates (e.g. "maths" vs "math")
+   c. For genuinely new tags: ask the user to confirm, then call `create_tag(name)` to add them
+   d. Only use tags that exist in the catalog when calling `create_resource`
+
 1. **Gather Requirements**: Ask the user about:
    - Topic/subject for the resource
    - Target audience (age, skill level)
@@ -33,11 +39,14 @@ When this skill is invoked, follow these steps:
    - Keep sections digestible
    - **IMPORTANT: Avoid text-heavy resources.** Every section should either have a quiz, an image, or both. If a section is just text with no interactivity, consider adding a quick quiz to check understanding or an image to illustrate the concept. Students learn best when they actively participate, not passively listen.
 
-4. **Generate Media**: Use image generation tools to create visuals for the resource. **Every resource should have images** — they are essential for engagement, not optional decoration.
-   - Diagrams, illustrations, and educational visuals
-   - PDFs for worksheets, reference materials, and supplementary reading (max 20 MB)
-   - Upload via `upload_image_from_url` (preferred) or `create_image`
-   - Always provide complete metadata (description, question, answer, hint)
+4. **Source Media**: Find or create visuals for the resource. **Every resource should have images** — they are essential for engagement, not optional decoration.
+   - **Do NOT generate images via Python/code** — this is too slow and produces poor results
+   - **Use `create_text_image`** for vocabulary cards, sight words, labels, math expressions — instant, no API key needed
+   - **Use `generate_image`** for custom educational illustrations — server-side AI generation, fast, no base64 overhead
+   - **Use `upload_image_from_url`** for existing public images (Wikimedia, educational sites)
+   - **Use `create_image` (base64) only as a last resort** for user-provided local files
+   - **Verify every image**: After generation/upload, view the image to confirm it matches intent
+   - Write description/question/answer/hint based on what the image ACTUALLY shows, not what you intended
    - For PDFs: description is critical since the bot cannot read PDF content
 
 5. **Execute Creation**: Use MCP tools to:
@@ -61,27 +70,40 @@ Use the `tutorbot` MCP server tools:
 | `get_resource` | Fetch a resource by ID |
 | `create_resource` | Create a new resource |
 | `update_resource` | Update an existing resource |
-| `create_image` | Upload an image or PDF (base64 data) to a resource |
-| `upload_image_from_url` | Upload an image or PDF from a URL to a resource (preferred for remote use) |
+| `generate_image` | Generate an AI image from a text prompt and attach to a resource (uses org's OpenAI key, preferred) |
+| `create_text_image` | Render a word/phrase into a PNG image (no AI needed, instant) |
+| `upload_image_from_url` | Upload an image or PDF from a URL to a resource |
+| `create_image` | Upload an image or PDF (base64 data) to a resource (last resort) |
 | `create_quiz` | Create a quiz for a resource |
-| `list_tags` | List available tags |
+| `list_tags` | List available tags in the organization's catalog |
+| `create_tag` | Create a new tag in the organization's tag catalog |
 | `export_resource` | Export a resource as a base64-encoded ZIP (includes all media and quizzes) |
 | `import_resource` | Import a resource from a base64-encoded ZIP (creates a new resource) |
 | `create_course` | Create a new course (collection of resources) |
 | `list_courses` | List existing courses |
 | `add_resource_to_course` | Add a resource to a course |
+| `list_course_resources` | List resources already in a course (with details) |
 
 ### Workflow
 
 ```
-1. create_resource(name, content, tags, deliveryMode)
-   → Returns resource with ID
+0. list_tags(pageSize: 50) → Fetch org's tag catalog
+   create_tag(name) → Create new tags (after user confirmation)
 
-2. upload_image_from_url(resourceId, url, name, description, question, answer, hint, botVisible)
-   → Returns image with ID
+1. create_resource(name, content, tags, deliveryMode)
+   → Returns resource with ID (tags must come from the catalog)
+
+2. generate_image(resourceId, prompt, description, question, answer, hint, botVisible)
+   → AI-generated image attached to resource (preferred for illustrations)
    OR
+   create_text_image(resourceId, text, color, description, question, answer, hint, botVisible)
+   → Renders word/phrase into PNG (preferred for vocabulary/labels)
+   OR
+   upload_image_from_url(resourceId, url, description, question, answer, hint, botVisible)
+   → Downloads and attaches image from URL
+   OR (last resort)
    create_image(resourceId, name, mimeType, data, description, question, answer, hint, botVisible)
-   → Returns image with ID
+   → Uploads base64-encoded image
 
 3. create_quiz(resourceId, question, questionType, answers, ...)
    → Returns quiz with ID
@@ -92,13 +114,16 @@ Use the `tutorbot` MCP server tools:
 5. (Optional) create_course(name, description, tags, progressionType)
    → Returns course with ID
 
-6. (Optional) add_resource_to_course(courseId, resourceId, order)
+6. (Optional) list_course_resources(courseId)
+   → View existing resources in a course before adding
+
+7. (Optional) add_resource_to_course(courseId, resourceId, order)
    → Adds resource to the course
 
-7. (Optional) export_resource(resourceId)
+8. (Optional) export_resource(resourceId)
    → Returns base64-encoded ZIP for backup or sharing
 
-8. (Optional) import_resource(zipData)
+9. (Optional) import_resource(zipData)
    → Creates a new resource from a previously exported ZIP
 ```
 
@@ -107,8 +132,27 @@ Use the `tutorbot` MCP server tools:
 **create_resource:**
 - `name` (required): Display name for the resource
 - `content` (required): Markdown content
-- `tags` (optional): Array of tags for organization
+- `tags` (optional): Array of tags — must come from the tag catalog (call `list_tags` first, use `create_tag` for new ones)
 - `deliveryMode` (optional): `"conversation"` or `"presentation"`
+
+**generate_image** (preferred for custom illustrations):
+- `resourceId` (required): Resource to attach the image to
+- `prompt` (required): Text prompt describing the educational image to generate (max 4000 chars)
+- `description` (optional): What the image shows (important for bot)
+- `question` (optional): Question to ask about the image
+- `answer` (optional): Expected answer
+- `hint` (optional): Help for students
+- `botVisible` (optional): If true, bot can see the image
+
+**create_text_image** (preferred for words/phrases):
+- `resourceId` (required): Resource to attach the image to
+- `text` (required): The word or phrase to render (max 500 chars)
+- `color` (optional): Font color as CSS color (e.g. `"#333333"`, `"red"`). Defaults to `"#333333"`
+- `description` (optional): What the image shows (important for bot)
+- `question` (optional): Question to ask about the image
+- `answer` (optional): Expected answer
+- `hint` (optional): Help for students
+- `botVisible` (optional): If true, bot can see the image
 
 **upload_image_from_url** (preferred for remote use):
 - `resourceId` (required): Resource to attach image to
@@ -257,6 +301,13 @@ Each quiz file (e.g. `quizzes/quiz-001.json`) contains:
   "description": "Quiz after the number line example."
 }
 ```
+
+**create_tag:**
+- `name` (required): Tag name to create (max 128 chars, lowercase recommended)
+
+**list_course_resources:**
+- `courseId` (required): The course ID to list resources for
+- Returns: Ordered list of resources with name, tags, order, and bot details (content stripped to save tokens)
 
 **add_resource_to_course:**
 - `courseId` (required): Course ID
@@ -445,17 +496,66 @@ Students drag and drop items into the correct sequence. The answers array order 
 ```
 Note: `isCorrect` is ignored for ordered_list — the array order IS the correct answer. Minimum 2 items, maximum 10.
 
-## Generating Images with AI
+## Image Creation Speed
 
-For AI-generated images:
+**NEVER generate images via Python/code execution** (matplotlib, PIL, etc.) — this is extremely slow, produces poor results, and sends huge base64 payloads through MCP.
 
-1. **Generate** with educational prompts like:
-   - "A simple diagram showing [concept], suitable for [age] students"
-   - "An illustration of [subject] with labeled parts"
+Instead, use these server-side tools in order of preference:
 
-2. **Host temporarily** - upload the generated image to an accessible URL or use base64
+1. **`create_text_image`** — for words, phrases, vocabulary cards, sight words, labels, math expressions. Instant, no API key needed, deterministic rendering.
+2. **`generate_image`** — for custom educational illustrations, diagrams, scenes. Uses the org's OpenAI API key for server-side AI generation. Fast, no client-side overhead.
+3. **`upload_image_from_url`** — for publicly hosted images from Wikimedia, educational sites, etc.
+4. **`create_image` (base64)** — last resort only, for user-provided local files.
 
-3. **Upload** with `upload_image_from_url` (preferred) providing complete metadata (description, question, answer, hint, botVisible)
+## Image Metadata Accuracy
+
+**View/inspect every image before setting metadata.** AI-generated images may not match your prompt exactly.
+
+- Write `description`, `question`, `answer`, and `hint` based on what the image ACTUALLY shows, not what you intended
+- If the image doesn't match your intent, regenerate it or adjust the metadata to match reality
+
+**Bad example** (metadata written from intent, not inspection):
+```
+generate_image(prompt: "A number line showing 5 + 3 = 8")
+# Sets metadata WITHOUT viewing the result:
+description: "Number line showing 5 + 3 = 8"  # ← May not match actual image
+```
+
+**Good example** (metadata written after inspection):
+```
+generate_image(prompt: "A number line showing 5 + 3 = 8")
+# Views the returned image, sees it actually shows a number line 0-10 with an arrow from 5 to 8
+description: "A number line from 0 to 10 with an arrow jumping from 5 to 8"
+question: "What number does the arrow land on?"
+answer: "8"
+```
+
+## Tag Governance
+
+**Always call `list_tags` before assigning tags to resources.** This prevents tag sprawl and keeps the organization's tag catalog clean.
+
+### Rules
+- Reuse existing tags — don't create near-duplicates ("maths" vs "math", "Year 1" vs "year-1")
+- Ask the user before creating new tags via `create_tag`
+- Naming conventions: lowercase, hyphens for multi-word (e.g. "year-3", "key-stage-2", "number-bonds")
+- Prefer broader tags over hyper-specific ones ("fractions" not "adding-unit-fractions-year-4")
+
+### Example flow
+```
+# Step 1: Check existing tags
+list_tags(pageSize: 50)
+# → Items: [{ name: "maths" }, { name: "year-3" }, { name: "fractions" }]
+
+# Step 2: User wants a resource tagged "maths", "year-3", "number-line"
+# "maths" and "year-3" exist. "number-line" is new.
+# → Ask user: "The tag 'number-line' doesn't exist yet. Shall I create it?"
+
+# Step 3: User confirms
+create_tag(name: "number-line")
+
+# Step 4: Create resource with all tags from catalog
+create_resource(name: "...", content: "...", tags: ["maths", "year-3", "number-line"])
+```
 
 ## Best Practices
 
@@ -464,12 +564,15 @@ For AI-generated images:
 3. **Keep resources short** - 5-10 minutes is ideal per resource; split longer content into multiple resources within a course
 4. **Include plenty of quizzes** - Aim for **at least 2-3 quizzes per resource**, placed after each major concept. Quizzes are the primary way to keep students actively engaged. A resource with fewer than 2 quizzes almost always feels too passive. Use a variety of quiz types (single choice, multiple choice, open answer, fraction, ordered list) to keep things interesting.
 5. **Include images in every resource** - Aim for **at least 1-2 images per resource**. Visuals break up text, illustrate concepts, and give the bot concrete material to discuss. Text-only resources feel dry and lecture-like.
-6. **Provide complete media metadata** - Description, question, answer, and hint for every image
+6. **Provide accurate media metadata** - View every image before setting description, question, answer, and hint. Write metadata for what the image actually shows, not what you intended.
 7. **Enable botVisible for important images** - Let the bot see diagrams and charts
 8. **Always embed references** - Images need `![ID](/api/v1/images/ID/data)` and quizzes need `::quiz{#ID}` in the content
 9. **Design resources to be self-contained** - Each resource should make sense on its own and be reusable across courses
 10. **Avoid text-heavy content** - If any section of your resource is more than a few sentences without a quiz or image, it's probably too text-heavy. Add interactivity.
 11. **Test your resources** - Use the Test Resource feature in the admin UI before assigning to students
+12. **Always call `list_tags` before assigning tags** - Reuse existing tags and only create new ones (via `create_tag`) with user confirmation.
+13. **Verify image content before writing metadata** - AI-generated images may not match your prompt exactly. View the image first.
+14. **Never run Python or other code to generate images** - Use `create_text_image` for words/phrases, `generate_image` for custom illustrations, `upload_image_from_url` for public images.
 
 ## Additional Resources
 

@@ -250,12 +250,30 @@ When you add an image, you must fill in four fields:
 
 ### Adding an Image
 
-1. Click the image button in the toolbar
-2. Select an image file — only **PNG** and **JPEG** formats are supported (max 5 MB)
-3. The image appears in your content
-4. Click the image to open the settings panel
-5. Fill in all four metadata fields
-6. Click **Save** to store the metadata
+Click the image button in the toolbar to open the media dialog. You have three ways to add images:
+
+**Upload File** (first tab):
+1. Click **Choose Image, Video, or PDF**
+2. Select a file — **PNG** and **JPEG** images (max 5 MB), videos (max 100 MB), or PDFs (max 20 MB)
+3. The file is uploaded and inserted into your content
+
+**AI Image** (second tab):
+1. Enter a text prompt describing the image you want (e.g. "A simple diagram showing the water cycle, suitable for primary school students")
+2. Click **Generate** — the image is created using AI and inserted into your content
+3. This uses your organization's OpenAI API key
+4. Best for: custom illustrations, diagrams, educational scenes
+
+**Word Image** (third tab):
+1. Enter a word or phrase (e.g. "Photosynthesis", "3/4 + 1/2")
+2. Optionally pick a font color
+3. Click **Create** — a clean text image is generated instantly and inserted into your content
+4. Supports multi-line text (use Shift+Enter for new lines)
+5. Best for: vocabulary cards, sight words, math expressions, labels, flash cards
+
+After inserting any image:
+1. Click the image in the editor to open the settings panel
+2. Fill in all four metadata fields (description, question, answer, hint)
+3. Click **Save** to store the metadata
 
 ### Writing Effective Image Metadata
 
@@ -315,6 +333,7 @@ Even with Bot Vision enabled, you should still provide a good description, quest
 ### Image Best Practices
 
 - **Include at least 1-2 images per resource** — every resource should have visuals. Text-only resources feel dry and lecture-like.
+- **Use the right tool for the job**: Use **Word Image** for vocabulary and labels (instant, no API key needed). Use **AI Image** for custom illustrations and diagrams. Use **Upload** for existing files.
 - **Use clear, simple images** that focus on one concept
 - **Write detailed descriptions** even if Bot Vision is enabled
 - **Enable Bot Vision** for images where visual details matter
@@ -370,9 +389,9 @@ PDFs allow you to attach downloadable documents to your lessons — worksheets, 
 
 ### How to Upload
 
-Upload PDFs through the same media panel used for images and videos:
+Upload PDFs through the media dialog (same as images and videos):
 
-1. Click **Choose Image, Video, or PDF** in the resource editor
+1. Click the image button in the toolbar, then use the **Upload** tab
 2. Select a PDF file (maximum 20 MB)
 3. The PDF will appear in the editor with a distinctive red border and PDF icon
 4. Click on it to open the side panel and configure metadata
