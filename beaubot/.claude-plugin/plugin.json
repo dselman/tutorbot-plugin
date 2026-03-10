@@ -1,0 +1,12 @@
+{
+  "name": "beaubot",
+  "version": "1.1.0",
+  "description": "Create educational lessons and evaluate student performance with images, quizzes, and courses for voice delivery to students",
+  "author": {
+    "name": "Tornado Labs",
+    "url": "https://tornadolabs.net"
+  },
+  "homepage": "https://tornadolabs.net",
+  "license": "MIT",
+  "keywords": ["education", "tutoring", "lesson-authoring", "voice-tutor", "voice-learning"]
+}

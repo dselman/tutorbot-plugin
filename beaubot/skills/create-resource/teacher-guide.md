@@ -92,7 +92,7 @@ The exported ZIP contains everything needed to recreate the resource:
 
 1. Go to **Teaching > Resources**
 2. Click **Import Resource** (next to New Resource)
-3. Select a `.zip` file exported from TutorBot
+3. Select a `.zip` file exported from Beau
 4. The system creates a new resource with all media and quizzes
 5. You're redirected to the new resource's edit page
 

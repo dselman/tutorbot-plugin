@@ -1,12 +1,12 @@
 ---
 name: create-resource
-description: Create educational content (resources and courses) for the TutorBot SaaS application. Use when the user wants to create resources, courses, quizzes, or upload images/PDFs for AI-powered voice delivery.
+description: Create educational content (resources and courses) for the Beau platform. Use when the user wants to create resources, courses, quizzes, or upload images/PDFs for voice delivery.
 user_invocable: true
 ---
 
 # Create Resource Skill
 
-This skill helps you create educational resources for the TutorBot platform. Resources are the building blocks of your curriculum - each is a self-contained learning unit delivered by AI bots to students via voice conversation or presentation mode. Resources are grouped into courses.
+This skill helps you create educational resources for the Beau platform. Resources are the building blocks of your curriculum - each is a self-contained learning unit delivered by AI bots to students via voice conversation or presentation mode. Resources are grouped into courses.
 
 ## Instructions for Claude
 
@@ -60,7 +60,7 @@ When this skill is invoked, follow these steps:
 
 ## MCP Tools
 
-Use the `tutorbot` MCP server tools:
+Use the `beaubot` MCP server tools:
 
 ### Available Tools
 

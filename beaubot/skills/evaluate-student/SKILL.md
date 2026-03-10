@@ -6,7 +6,7 @@ user_invocable: true
 
 # Evaluate Student Skill
 
-This skill helps teachers evaluate student performance on the TutorBot platform. It analyzes course progress, quiz scores, activity patterns, and conversation transcripts to produce structured, evidence-based reports with actionable recommendations.
+This skill helps teachers evaluate student performance on the Beau platform. It analyzes course progress, quiz scores, activity patterns, and conversation transcripts to produce structured, evidence-based reports with actionable recommendations.
 
 ## Instructions for Claude
 
@@ -50,7 +50,7 @@ Use the report templates below to produce the final output.
 
 ## MCP Tools Reference
 
-Use the `tutorbot` MCP server tools for data collection:
+Use the `beaubot` MCP server tools for data collection:
 
 | Tool | Description | Use When |
 |------|-------------|----------|

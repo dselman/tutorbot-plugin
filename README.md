@@ -1,10 +1,10 @@
-# TutorBot Plugin for Claude Code
+# Beau Plugin for Claude Code
 
-A Claude Code plugin for creating educational resources on the [TutorBot](https://tornadolabs.net) platform. This plugin gives Claude the knowledge and tools to author resources, upload images, create quizzes, and organize courses - all delivered by AI bots to students via voice.
+A Claude Code plugin for creating educational resources on the [Beau](https://tornadolabs.net) platform. This plugin gives Claude the knowledge and tools to author resources, upload images, create quizzes, and organize courses - all delivered by voice to students.
 
 ## What This Plugin Provides
 
-- **MCP Server Connection**: Connects to the TutorBot API for resource management (create/update resources, upload images, create quizzes, manage courses)
+- **MCP Server Connection**: Connects to the Beau API for resource management (create/update resources, upload images, create quizzes, manage courses)
 - **Authoring Skill**: The `create-resource` skill teaches Claude how to structure educational resources with proper markdown syntax for embedding images and quizzes
 - **Evaluation Skill**: The `evaluate-student` skill helps analyse student performance across courses
 
@@ -12,15 +12,15 @@ A Claude Code plugin for creating educational resources on the [TutorBot](https:
 
 In Claude Code:
 ```
-/install-plugin dselman/tutorbot-plugin
+/install-plugin dselman/beaubot-plugin
 ```
 
 ## Usage
 
 Once installed, invoke the skills:
 ```
-/tutorbot:create-resource
-/tutorbot:evaluate-student
+/beaubot:create-resource
+/beaubot:evaluate-student
 ```
 
 Claude will guide you through creating a resource by asking about the topic, audience, delivery mode, and learning objectives. It then uses the MCP tools to create the resource, upload images, create quizzes, and embed everything into the content.
@@ -52,7 +52,7 @@ Claude will guide you through creating a resource by asking about the topic, aud
 
 ## Authentication
 
-The MCP server uses OAuth 2.1 with Auth0. When you first use a tool, you'll be prompted to authenticate with your TutorBot account.
+The MCP server uses OAuth 2.1 with Auth0. When you first use a tool, you'll be prompted to authenticate with your Beau account.
 
 ## License
 
